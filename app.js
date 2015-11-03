@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+var latCord;
+    var longCord;
   // check for Geolocation support
   if (navigator.geolocation) {
     console.log('Geolocation is supported!');
@@ -9,6 +10,7 @@ $(document).ready(function() {
   //get location of user lat/long  
   window.onload = function() {
     var startPos;
+    
     //speed up call by allowing for cached results
     var geoOptions = {
     maximumAge: 5 * 60 * 1000,
@@ -17,6 +19,13 @@ $(document).ready(function() {
       startPos = position;
       document.getElementById('startLat').innerHTML = startPos.coords.latitude;
       document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+      //use ABS to remove dash so can be used in api call as vars
+      latCord = Math.abs(startPos.coords.latitude);
+      longCord = Math.abs(startPos.coords.longitude);
+      
+      $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latCord + "&lon=" + longCord + "&units=imperial&appid=bd82977b86bf27fb59a04b61b657fb6f", function(json) {
+      $(".message").html(JSON.stringify(json));
+      });
     };
     //handle errors with lookup
     var geoError = function(error) {
@@ -28,11 +37,7 @@ $(document).ready(function() {
       //   3: timed out
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
+    
   };
-
-
-  $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=45&lon=122&units=imperial&appid=bd82977b86bf27fb59a04b61b657fb6f", function(json) {
-        $(".message").html(JSON.stringify(json));
-      });
-
+  
 });
