@@ -1,7 +1,19 @@
-body {
-  margin-top: 50px;
-}
 
+body { 
+   margin-top: 50px;
+  background: url("http://i.imgur.com/iQbWHp4.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.other-pic {
+   background: url("http://i.imgur.com/qBaDX1T.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 section {
   padding: 75px 0;
 }
