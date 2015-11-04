@@ -24,7 +24,25 @@ var latCord;
       longCord = Math.abs(startPos.coords.longitude);
       
       $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latCord + "&lon=" + longCord + "&units=imperial&appid=bd82977b86bf27fb59a04b61b657fb6f", function(json) {
-      $(".message").html(JSON.stringify(json));
+      
+        var main = json["weather"][0].main;
+        var icon = json["weather"][0].icon;
+        var desc = json["weather"][0].description;
+        var temp = json["main"].temp;
+        var id = json["weather"][0].id;
+
+          console.log(json["main"].temp);
+         console.log(json["weather"][0].main);
+         console.log(json["weather"][0].icon);
+         console.log(json["weather"][0].description);
+          console.log(json["weather"][0].id);
+        // $(".message").html(data[coord]);
+        var html = "<p>temp: " + temp + "<br>description: " + desc  + "<img src='http://openweathermap.org/img/w/" + icon + ".png' /></p>";
+        
+      
+        $(".message").html(html);
+
+
       });
     };
     //handle errors with lookup
