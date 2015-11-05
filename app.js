@@ -28,12 +28,6 @@ var latCord;
          temp = json["main"].temp;
          id = json["weather"][0].id;
 
-          console.log(json["main"].temp);
-         console.log(json["weather"][0].main);
-         console.log(json["weather"][0].icon);
-         console.log(json["weather"][0].description);
-          console.log(json["weather"][0].id);
-        // $(".message").html(data[coord]);
         var html = "<span><h4>Hey!! If the temperature is:  <span class='red'>" + temp + "</span> and it's <span class='red'> " + desc  + "</span> out <img src='http://openweathermap.org/img/w/" + icon + ".png' /> You should be grumpy!! Duh!!</h4></span>";
         
       
