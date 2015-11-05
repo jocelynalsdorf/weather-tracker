@@ -11,25 +11,22 @@ var latCord;
   window.onload = function() {
     var startPos;
     
-    //speed up call by allowing for cached results
-    var geoOptions = {
-    maximumAge: 5 * 60 * 1000,
-  }
+    
     var geoSuccess = function(position) {
       startPos = position;
-      document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-      document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+      //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+      //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
       //use ABS to remove dash so can be used in api call as vars
       latCord = Math.abs(startPos.coords.latitude);
-      longCord = Math.abs(startPos.coords.longitude);
+      longCord = startPos.coords.longitude;
       
-      $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latCord + "&lon=" + longCord + "&units=imperial&appid=bd82977b86bf27fb59a04b61b657fb6f", function(json) {
-      
-        var main = json["weather"][0].main;
-        var icon = json["weather"][0].icon;
-        var desc = json["weather"][0].description;
-        var temp = json["main"].temp;
-        var id = json["weather"][0].id;
+      $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latCord + "&lon=" + longCord + "&units=imperial&appid=db9fe2ee08823462de2d39da4ec76db2", function(json) {
+        var main, icon, icon, desc, temp, id;
+         main = json["weather"][0].main;
+         icon = json["weather"][0].icon;
+         desc = json["weather"][0].description;
+         temp = json["main"].temp;
+         id = json["weather"][0].id;
 
           console.log(json["main"].temp);
          console.log(json["weather"][0].main);
@@ -37,7 +34,7 @@ var latCord;
          console.log(json["weather"][0].description);
           console.log(json["weather"][0].id);
         // $(".message").html(data[coord]);
-        var html = "<p>temp: " + temp + "<br>description: " + desc  + "<img src='http://openweathermap.org/img/w/" + icon + ".png' /></p>";
+        var html = "<span><h4>Hey!! If the temperature is:  <span class='red'>" + temp + "</span> and it's <span class='red'> " + desc  + "</span> out <img src='http://openweathermap.org/img/w/" + icon + ".png' /> You should be grumpy!! Duh!!</h4></span>";
         
       
         $(".message").html(html);
